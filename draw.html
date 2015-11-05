@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
+    <link href="http://getbootstrap.com/examples/justified-nav/justified-nav.css" rel="stylesheet">
+
+    <style>
+        .axis path {
+            fill: none;
+            stroke: #777;
+            shape-rendering: crispEdges;
+        }
+        .axis text {
+            font-family: Lato;
+            font-size: 13px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="jumbotron">
+
+            <svg id="visualisation" width="1200" height="500"></svg>
+            <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+            <script>
+            var JSONString;
+            var JSONObjects;
+            $.ajax({
+              dataType: "json",
+              url: "./frequency.json",
+              success: function(data)
+              {
+                JSONString = JSON.stringify(data);
+                JSONObjects = data;
+                //console.log(JSONString);
+              }
+            });
+            //var data = $.map(JSONObjects, function(el) { return el });
+            //var data = JSONString.stringify;
+            var data = [{"Timestamp":"1445447419550","Frequency":"2.4"},{"Timestamp":"1445447429550","Frequency":"2.7"},{"Timestamp":"1445447439562","Frequency":"9.2"},{"Timestamp":"1445447449562","Frequency":"12.6"},{"Timestamp":"1445447459647","Frequency":"6.3"},{"Timestamp":"1445447469648","Frequency":"5.4"},{"Timestamp":"1445447479649","Frequency":"4.9"},{"Timestamp":"1445447489651","Frequency":"2.9"},{"Timestamp":"1445447499654","Frequency":"3.3"},{"Timestamp":"1445447509658","Frequency":"3.7"},{"Timestamp":"1445447519696","Frequency":"4.3"},{"Timestamp":"1445447529986","Frequency":"3.4"},{"Timestamp":"1445447541138","Frequency":"3.1"},{"Timestamp":"1445447552183","Frequency":"3.1"},{"Timestamp":"1445447562984","Frequency":"5.3"},{"Timestamp":"1445447574089","Frequency":"6"},{"Timestamp":"1445447585889","Frequency":"2.5"},{"Timestamp":"1445447596256","Frequency":"1.3"},{"Timestamp":"1445447607473","Frequency":"1.1"},{"Timestamp":"1445447618389","Frequency":"1"},{"Timestamp":"1445447628980","Frequency":"1.7"},{"Timestamp":"1445447641151","Frequency":"2.8"},{"Timestamp":"1445447651979","Frequency":"2.6"},{"Timestamp":"1445447662979","Frequency":"1.1"},{"Timestamp":"1445447673994","Frequency":"2.3"},{"Timestamp":"1445447684980","Frequency":"1.3"},{"Timestamp":"1445447697001","Frequency":"1.7"},{"Timestamp":"1445447707981","Frequency":"1"},{"Timestamp":"1445447718977","Frequency":"2.3"},{"Timestamp":"1445447729977","Frequency":"2.2"},{"Timestamp":"1445447741047","Frequency":"3.4"},{"Timestamp":"1445447751980","Frequency":"3.8"},{"Timestamp":"1445447762976","Frequency":"4"},{"Timestamp":"1445447774201","Frequency":"9.1"},{"Timestamp":"1445447784980","Frequency":"7.1"},{"Timestamp":"1445447795976","Frequency":"6.5"},{"Timestamp":"1445447806974","Frequency":"5.3"},{"Timestamp":"1445447817975","Frequency":"4.4"},{"Timestamp":"1445447829191","Frequency":"4.1"},{"Timestamp":"1445447839980","Frequency":"4.4"},{"Timestamp":"1445447850130","Frequency":"4.3"},{"Timestamp":"1445447861136","Frequency":"3"},{"Timestamp":"1445447871972","Frequency":"3.2"},{"Timestamp":"1445447883089","Frequency":"2.2"},{"Timestamp":"1445447894188","Frequency":"3.4"},{"Timestamp":"1445447905185","Frequency":"2.5"},{"Timestamp":"1445447915971","Frequency":"1.9"},{"Timestamp":"1445447928854","Frequency":"2.1"},{"Timestamp":"1445447939634","Frequency":"1.8"},{"Timestamp":"1445447950401","Frequency":"2.4"},{"Timestamp":"1445447961286","Frequency":"1.6"},{"Timestamp":"1445447972531","Frequency":"0.7"},{"Timestamp":"1445447982968","Frequency":"2.2"},{"Timestamp":"1445447993968","Frequency":"1.8"},{"Timestamp":"1445448004968","Frequency":"2.3"},{"Timestamp":"1445448017300","Frequency":"2"},{"Timestamp":"1445448028371","Frequency":"1.4"},{"Timestamp":"1445448038967","Frequency":"2.3"},{"Timestamp":"1445448049999","Frequency":"2.9"},{"Timestamp":"1445448060966","Frequency":"1.4"},{"Timestamp":"1445448071983","Frequency":"2.2"},{"Timestamp":"1445448083508","Frequency":"1.3"},{"Timestamp":"1445448093966","Frequency":"1.1"},{"Timestamp":"1445448105088","Frequency":"1.8"},{"Timestamp":"1445448116118","Frequency":"4"},{"Timestamp":"1445448126965","Frequency":"1.1"},{"Timestamp":"1445448138198","Frequency":"1.2"},{"Timestamp":"1445448148964","Frequency":"2.4"},{"Timestamp":"1445448160019","Frequency":"2.6"},{"Timestamp":"1445448170964","Frequency":"3.2"},{"Timestamp":"1445448181963","Frequency":"0.9"},{"Timestamp":"1445448193019","Frequency":"1.1"},{"Timestamp":"1445448203963","Frequency":"7.1"},{"Timestamp":"1445448215079","Frequency":"4.1"},{"Timestamp":"1445448225963","Frequency":"2.3"},{"Timestamp":"1445448236963","Frequency":"0.9"},{"Timestamp":"1445448247962","Frequency":"1.4"},{"Timestamp":"1445448259080","Frequency":"2.9"},{"Timestamp":"1445448270415","Frequency":"2"},{"Timestamp":"1445448280961","Frequency":"2.5"},{"Timestamp":"1445448292016","Frequency":"2"},{"Timestamp":"1445448303040","Frequency":"3"},{"Timestamp":"1445448313991","Frequency":"1.8"},{"Timestamp":"1445448324960","Frequency":"2.5"},{"Timestamp":"1445448336335","Frequency":"2"},{"Timestamp":"1445448347101","Frequency":"1.2"},{"Timestamp":"1445448358128","Frequency":"1.5"},{"Timestamp":"1445448368960","Frequency":"2.8"},{"Timestamp":"1445448379991","Frequency":"1.9"},{"Timestamp":"1445448390998","Frequency":"2.4"},{"Timestamp":"1445448402090","Frequency":"7.8"},{"Timestamp":"1445448413030","Frequency":"4.8"},{"Timestamp":"1445448424101","Frequency":"2.3"},{"Timestamp":"1445448434961","Frequency":"2"},{"Timestamp":"1445448445959","Frequency":"1.6"},{"Timestamp":"1445448456957","Frequency":"1.8"},{"Timestamp":"1445448468116","Frequency":"3.1"},{"Timestamp":"1445448478976","Frequency":"1.2"},{"Timestamp":"1445448489956","Frequency":"1.5"},{"Timestamp":"1445448500956","Frequency":"1.3"},{"Timestamp":"1445448512288","Frequency":"1.8"},{"Timestamp":"1445448524698","Frequency":"1.6"},{"Timestamp":"1445448534956","Frequency":"0.9"},{"Timestamp":"1445448547539","Frequency":"0.5"},{"Timestamp":"1445448558330","Frequency":"1.4"},{"Timestamp":"1445448568955","Frequency":"3.1"},{"Timestamp":"1445448579954","Frequency":"4.5"},{"Timestamp":"1445448591030","Frequency":"4.1"},{"Timestamp":"1445448602338","Frequency":"4.1"},{"Timestamp":"1445448613209","Frequency":"4.1"},{"Timestamp":"1445448624021","Frequency":"5.8"},{"Timestamp":"1445448634953","Frequency":"2.8"},{"Timestamp":"1445448646475","Frequency":"1.5"},{"Timestamp":"1445448657129","Frequency":"2.7"},{"Timestamp":"1445448668052","Frequency":"2.1"},{"Timestamp":"1445448679116","Frequency":"3.5"},{"Timestamp":"1445448690003","Frequency":"2.7"},{"Timestamp":"1445448700973","Frequency":"2.1"},{"Timestamp":"1445448712399","Frequency":"1.1"},{"Timestamp":"1445448723036","Frequency":"1.5"},{"Timestamp":"1445448734781","Frequency":"2.1"},{"Timestamp":"1445448745469","Frequency":"2.5"},{"Timestamp":"1445448756070","Frequency":"2.7"},{"Timestamp":"1445448767961","Frequency":"2.6"},{"Timestamp":"1445448779285","Frequency":"0.9"},{"Timestamp":"1445448789950","Frequency":"2.3"},{"Timestamp":"1445448801259","Frequency":"2.4"},{"Timestamp":"1445448811984","Frequency":"1.9"},{"Timestamp":"1445448823781","Frequency":"1.3"},{"Timestamp":"1445448834115","Frequency":"1.5"},{"Timestamp":"1445448844948","Frequency":"3.1"},{"Timestamp":"1445448856172","Frequency":"1.4"},{"Timestamp":"1445448867717","Frequency":"1.3"},{"Timestamp":"1445448877947","Frequency":"0.7"},{"Timestamp":"1445448888950","Frequency":"1.3"},{"Timestamp":"1445448900122","Frequency":"1.1"},{"Timestamp":"1445448911044","Frequency":"0.9"},{"Timestamp":"1445448921948","Frequency":"3.5"},{"Timestamp":"1445448933025","Frequency":"3.9"},{"Timestamp":"1445448944213","Frequency":"2.3"},{"Timestamp":"1445448955292","Frequency":"0.5"},{"Timestamp":"1445448965970","Frequency":"0.9"},{"Timestamp":"1445448977050","Frequency":"2.3"},{"Timestamp":"1445448987945","Frequency":"1.6"},{"Timestamp":"1445448999256","Frequency":"2"},{"Timestamp":"1445449009952","Frequency":"1"},{"Timestamp":"1445449020944","Frequency":"2.1"},{"Timestamp":"1445449032128","Frequency":"1.8"},{"Timestamp":"1445449042943","Frequency":"2.9"},{"Timestamp":"1445449054041","Frequency":"3"},{"Timestamp":"1445449065144","Frequency":"2"},{"Timestamp":"1445449076004","Frequency":"10.9"},{"Timestamp":"1445449086950","Frequency":"12.1"},{"Timestamp":"1445449097998","Frequency":"5.3"},{"Timestamp":"1445449109131","Frequency":"7.3"},{"Timestamp":"1445449120060","Frequency":"4.6"},{"Timestamp":"1445449130941","Frequency":"2.3"},{"Timestamp":"1445449141941","Frequency":"2.1"},{"Timestamp":"1445449152987","Frequency":"1.8"},{"Timestamp":"1445449163940","Frequency":"1.8"},{"Timestamp":"1445449174940","Frequency":"1.4"},{"Timestamp":"1445449186040","Frequency":"2.9"},{"Timestamp":"1445449197028","Frequency":"2.7"},{"Timestamp":"1445449207939","Frequency":"1.3"},{"Timestamp":"1445449218939","Frequency":"2"},{"Timestamp":"1445449229939","Frequency":"1.7"},{"Timestamp":"1445449242037","Frequency":"1.7"},{"Timestamp":"1445449252938","Frequency":"1.6"},{"Timestamp":"1445449263938","Frequency":"1"},{"Timestamp":"1445449274937","Frequency":"1.4"},{"Timestamp":"1445449286408","Frequency":"2.7"},{"Timestamp":"1445449296937","Frequency":"1.6"},{"Timestamp":"1445449307937","Frequency":"2.3"},{"Timestamp":"1445449318974","Frequency":"4.6"},{"Timestamp":"1445449330059","Frequency":"3.5"},{"Timestamp":"1445449341036","Frequency":"2.1"},{"Timestamp":"1445449351936","Frequency":"1.6"},{"Timestamp":"1445449363262","Frequency":"1.7"},{"Timestamp":"1445449374021","Frequency":"2.2"},{"Timestamp":"1445449384935","Frequency":"2.7"},{"Timestamp":"1445449396320","Frequency":"2"},{"Timestamp":"1445449406935","Frequency":"1.3"},{"Timestamp":"1445449418039","Frequency":"1.7"},{"Timestamp":"1445449429070","Frequency":"1.2"},{"Timestamp":"1445449442529","Frequency":"0.7"},{"Timestamp":"1445449453015","Frequency":"0.8"},{"Timestamp":"1445449464025","Frequency":"2.2"},{"Timestamp":"1445449474935","Frequency":"2.2"},{"Timestamp":"1445449486127","Frequency":"1.9"},{"Timestamp":"1445449496933","Frequency":"1.2"},{"Timestamp":"1445449508938","Frequency":"0.7"},{"Timestamp":"1445449519932","Frequency":"1.9"},{"Timestamp":"1445449530956","Frequency":"2.4"},{"Timestamp":"1445449541932","Frequency":"2.8"},{"Timestamp":"1445449553649","Frequency":"2.1"},{"Timestamp":"1445449564104","Frequency":"2.1"},{"Timestamp":"1445449574931","Frequency":"2.4"},{"Timestamp":"1445449585931","Frequency":"1.5"},{"Timestamp":"1445449597770","Frequency":"0.8"},{"Timestamp":"1445449609503","Frequency":"1"},{"Timestamp":"1445449620073","Frequency":"1.4"}];
+            data.forEach(function(element){
+
+            element.Timestamp = Math.round((parseInt(element.Timestamp)-1445447419550)/1000);
+            console.log(element);
+          });
+            function InitChart() {
+
+                    var vis = d3.select("#visualisation"),
+                        WIDTH = 1200,
+                        HEIGHT = 500,
+                        MARGINS = {
+                            top: 20,
+                            right: 20,
+                            bottom: 20,
+                            left: 50
+                        },
+                        xScale = d3.scale.linear().range([MARGINS.left, WIDTH - MARGINS.right]).domain([0, 2201]),
+                        yScale = d3.scale.linear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([0, 15]),
+                        xAxis = d3.svg.axis()
+                        .scale(xScale),
+                        yAxis = d3.svg.axis()
+                        .scale(yScale)
+                        .orient("left");
+
+                    vis.append("svg:g")
+                        .attr("class", "x axis")
+                        .attr("transform", "translate(0," + (HEIGHT - MARGINS.bottom) + ")")
+                        .call(xAxis);
+                    vis.append("svg:g")
+                        .attr("class", "y axis")
+                        .attr("transform", "translate(" + (MARGINS.left) + ",0)")
+                        .call(yAxis);
+                    var lineGen = d3.svg.line()
+                        .x(function(d) {
+                            return xScale(d.Timestamp);
+                        })
+                        .y(function(d) {
+                            return yScale(d.Frequency);
+                        })
+                        .interpolate("basis");
+                    vis.append('svg:path')
+                        .attr('d', lineGen(data))
+                        .attr('stroke', 'green')
+                        .attr('stroke-width', 2)
+                        .attr('fill', 'none');
+
+                }
+                InitChart();
+            </script>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
