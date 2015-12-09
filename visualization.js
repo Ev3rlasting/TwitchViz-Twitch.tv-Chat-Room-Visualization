@@ -18,7 +18,7 @@ data.forEach(function(element){
   element.Timestamp = Math.round((parseInt(element.Timestamp)-base)/1000);
   //console.log(element);
 });
-function InitChart() {
+
 
   var vis = d3.select("#visualisation"),
   WIDTH = 1200,
@@ -45,6 +45,9 @@ function InitChart() {
   .attr("class", "y axis")
   .attr("transform", "translate(" + (MARGINS.left) + ",0)")
   .call(yAxis);
+
+
+
   var lineGen = d3.svg.line()
   .x(function(d) {
     return xScale(d.Timestamp);
@@ -53,10 +56,9 @@ function InitChart() {
     return yScale(d.Frequency);
   })
   .interpolate("line");
-  vis.append('svg:path')
+
+  var linepath = vis.append('svg:path')
   .attr('d', lineGen(data))
   .attr('stroke', 'green')
   .attr('stroke-width', 2)
   .attr('fill', 'none');
-}
-InitChart();

@@ -19,21 +19,34 @@
 </head>
 <body>
 
-<div class="videocontainer">
-  <!--Twitch Video  -->
-  <!-- <iframe src="http://player.twitch.tv/?video=v21942485" frameborder="0" scrolling="no" height="378" width="620"></iframe><a href="http://www.twitch.tv/wingsofdeath?tt_medium=live_embed&tt_content=text_link" style="padding:2px 0px 4px; display:block; width:345px; font-weight:normal; font-size:10px;text-decoration:underline;">Watch live video from Wingsofdeath on www.twitch.tv</a> -->
-  <object style="width: 1000px; height: 600px; " data="http://player.twitch.tv/?video=v21942485&time=11985"></object>
-  <!--End of Twitch Video  -->
-<!--Video Player overlay html  -->
-<div class="overlay">
-  <div class="viz">
-      <svg id="visualisation" width="1200" height="500"></svg>
-  </div>
-    </div>
-</div>
+  <div class="videocontainer">
 
+    <video id="lol" width="auto" height="auto" controls>
+      <source src="./videos/trimmed.mp4" type="video/mp4">
+      </video>
+      <br/>
+      <div class="video-buttons-area">
+        <button onclick="playPause()">Play/Pause</button>
+        <button onclick="makeBig()">Big</button>
+        <button onclick="makeSmall()">Small</button>
+        <button onclick="makeNormal()">Normal</button>
+      </div>
+      <!--Twitch Video  -->
+      <!-- <iframe src="http://player.twitch.tv/?video=v21942485" frameborder="0" scrolling="no" height="378" width="620"></iframe><a href="http://www.twitch.tv/wingsofdeath?tt_medium=live_embed&tt_content=text_link" style="padding:2px 0px 4px; display:block; width:345px; font-weight:normal; font-size:10px;text-decoration:underline;">Watch live video from Wingsofdeath on www.twitch.tv</a> -->
+      <!-- <object style="width: 1000px; height: 600px; " data="http://player.twitch.tv/?video=v21942485&time=11985"></object> -->
+      <!--End of Twitch Video  -->
+      <!--Video Player overlay html  -->
+      <div class="overlay">
+        <div class="viz">
+          <svg id="visualisation" width="1200" height="500"></svg>
+        </div>
+      </div>
+      <!--End of Video Player overlay html  -->
+    </div>
+    <!--End of Videocontainer  -->
   </body>
   <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script src="./videocontrol.js"></script>
   <script src="./visualization.js"></script>
 
   </html>
