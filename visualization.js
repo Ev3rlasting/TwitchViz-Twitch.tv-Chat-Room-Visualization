@@ -56,8 +56,23 @@ var lineGen = d3.svg.line()
 })
 .interpolate("line");
 
+var sliderData;
+
+var sliderGen = d3.svg.line()
+.x(function(d){return xScale(myVideo.currentTime+data[0].Timestamp);})
+.y(function(d){return yScale(d.Timestamp);})
+.interpolate("line");
+
 var linepath = vis.append('svg:path')
 .attr('d', lineGen(data))
 .attr('stroke', 'green')
 .attr('stroke-width', 2)
 .attr('fill', 'none');
+
+var slider = vis.append('svg:path')
+.attr("id","main-vis-slider")
+.attr('d',sliderGen(data))
+.attr('stroke-width', 3)
+.attr('stroke','blue');
+
+
