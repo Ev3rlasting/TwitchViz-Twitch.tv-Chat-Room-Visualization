@@ -20,45 +20,44 @@ data.forEach(function(element){
 });
 
 
-  var vis = d3.select("#visualisation"),
-  WIDTH = 1200,
-  HEIGHT = 500,
-  MARGINS = {
-    top: 20,
-    right: 20,
-    bottom: 20,
-    left: 50
-  },
-  xScale = d3.scale.linear().range([MARGINS.left, WIDTH - MARGINS.right]).domain([0, 1876]),
-  yScale = d3.scale.linear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([0, 2]),
-  xAxis = d3.svg.axis()
-  .scale(xScale),
-  yAxis = d3.svg.axis()
-  .scale(yScale)
-  .orient("left");
+var vis = d3.select("#visualisation"),
+WIDTH = 1200,
+HEIGHT = 500,
+MARGINS = {
+  top: 20,
+  right: 20,
+  bottom: 20,
+  left: 50
+},
+xScale = d3.scale.linear().range([MARGINS.left, WIDTH - MARGINS.right]).domain([0, 1876]),
+yScale = d3.scale.linear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([0, 2]);
+var xAxis = d3.svg.axis()
+.scale(xScale).ticks(20),
+yAxis = d3.svg.axis()
+.scale(yScale)
+.orient("left");
 
-  vis.append("svg:g")
-  .attr("class", "x axis")
-  .attr("transform", "translate(0," + (HEIGHT - MARGINS.bottom) + ")")
-  .call(xAxis);
-  vis.append("svg:g")
-  .attr("class", "y axis")
-  .attr("transform", "translate(" + (MARGINS.left) + ",0)")
-  .call(yAxis);
+vis.append("svg:g")
+.attr("class", "x axis")
+.attr("transform", "translate(0," + (HEIGHT - MARGINS.bottom) + ")")
+.call(xAxis);
+vis.append("svg:g")
+.attr("class", "y axis")
+.attr("transform", "translate(" + (MARGINS.left) + ",0)")
+.call(yAxis);
 
+var lineGen = d3.svg.line()
+.x(function(d) {
+ // console.log(xScale(d.Timestamp));
+  return xScale(d.Timestamp);
+})
+.y(function(d) {
+  return yScale(d.Frequency);
+})
+.interpolate("line");
 
-
-  var lineGen = d3.svg.line()
-  .x(function(d) {
-    return xScale(d.Timestamp);
-  })
-  .y(function(d) {
-    return yScale(d.Frequency);
-  })
-  .interpolate("line");
-
-  var linepath = vis.append('svg:path')
-  .attr('d', lineGen(data))
-  .attr('stroke', 'green')
-  .attr('stroke-width', 2)
-  .attr('fill', 'none');
+var linepath = vis.append('svg:path')
+.attr('d', lineGen(data))
+.attr('stroke', 'green')
+.attr('stroke-width', 2)
+.attr('fill', 'none');

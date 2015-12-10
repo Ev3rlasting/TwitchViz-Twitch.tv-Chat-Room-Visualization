@@ -8,7 +8,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
 </head>
 <script type="text/javascript">
-var channel = "summit1g";
+var channel = "tsm_bjergsen";
 var viewerNumber;
 
 var options = {
@@ -28,7 +28,7 @@ var messagesDict=[];
 var frequencyDict = [];
 var viewersDict = [];
 //Calculate messages frequency of every ten seconds
-var timeItvl = setInterval(calFrequency, 10000);
+var timeItvl = setInterval(calFrequency, 1000);
 
 function getTimestamp()
 {
@@ -68,7 +68,6 @@ function calFrequency()
     type: 'POST',
     data: {'Type':"Frequency", 'Timestamp': getTimestamp(),'Frequency':frequency}
   });
-  messagesDict=[];  //clear the message dictionary
 }
 // Connect the client to the server..
 client.connect();
