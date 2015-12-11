@@ -1,16 +1,13 @@
 var margin = {top: 10, right: 10, bottom: 100, left: 40},
 margin2 = {top: 430, right: 10, bottom: 20, left: 40},
-width = 960 - margin.left - margin.right,
+width = 1200 - margin.left - margin.right,
 height = 500 - margin.top - margin.bottom,
 height2 = 500 - margin2.top - margin2.bottom;
 
 var x = d3.scale.linear().range([0, width]).domain([0, 1876]),
-x2 = d3.scale.linear().range([0, width]).domain([0, 1876]),
-y = d3.scale.linear().range([height, 0]).domain([0, 2]),
-y2 = d3.scale.linear().range([height2, 0]).domain([0, 2]);
+y = d3.scale.linear().range([height, 0]).domain([0, 2]);
 
 var xAxis = d3.svg.axis().scale(x).ticks(20).orient("bottom"),
-xAxis2 = d3.svg.axis().scale(x2).ticks(20).orient("bottom"),
 yAxis = d3.svg.axis().scale(y).ticks(10).orient("left");
 
 var svg = d3.select(".viz").append("svg")
@@ -42,11 +39,17 @@ d3.json("./frequency.json", function(error, json) {
   drawArea(data);
 });
 
+svg.append("defs").append("clipPath")
+    .attr("id", "clip")
+  .append("rect")
+    .attr("width", width)
+    .attr("height", height);
+
 var area = d3.svg.area()
-    .interpolate("monotone")
-    .x(function(d) { return x(d.Timestamp); })
-    .y0(height)
-    .y1(function(d) { return y(d.Frequency); });
+.interpolate("monotone")
+.x(function(d) { return x(d.Timestamp); })
+.y0(height)
+.y1(function(d) { return y(d.Frequency); });
 
 function drawArea(data){
   main.append("path")
@@ -54,3 +57,17 @@ function drawArea(data){
   .datum(data)
   .attr("d",area);
 }
+function brushed(){
+  console.log("Brushed!");
+}
+
+var brush = d3.svg.brush()
+.x(x)
+.on("brush", brushed);
+
+main.append("g")
+.attr("class", "x brush")
+.call(brush)
+.selectAll("rect")
+.attr("y", -6)
+.attr("height", height);
