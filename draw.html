@@ -6,14 +6,26 @@
   <link href="http://getbootstrap.com/examples/justified-nav/justified-nav.css" rel="stylesheet">
   <script src="https://ttv-api.s3.amazonaws.com/twitch.min.js"></script>
   <style>
-  .axis path {
+  svg {
+    font: 10px sans-serif;
+  }
+
+  .area {
+    fill: steelblue;
+    clip-path: url(#clip);
+  }
+
+  .axis path,
+  .axis line {
     fill: none;
-    stroke: #777;
+    stroke: #000;
     shape-rendering: crispEdges;
   }
-  .axis text {
-    font-family: Lato;
-    font-size: 13px;
+
+  .brush .extent {
+    stroke: #fff;
+    fill-opacity: .125;
+    shape-rendering: crispEdges;
   }
   </style>
 </head>
@@ -38,7 +50,7 @@
       <!--Video Player overlay html  -->
       <div class="overlay">
         <div class="viz">
-          <svg id="visualisation" width="1200" height="500"></svg>
+          <!-- <svg id="visualisation" width="1200" height="500"></svg> -->
         </div>
       </div>
       <!--End of Video Player overlay html  -->
