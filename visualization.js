@@ -1,7 +1,7 @@
-var margin = {top: 10, right: 10, bottom: 100, left: 40},
+var margin = {top: 10, right: 10, bottom: 40, left: 40},
 margin2 = {top: 430, right: 10, bottom: 20, left: 40},
-width = 1200 - margin.left - margin.right,
-height = 500 - margin.top - margin.bottom,
+width = 700 - margin.left - margin.right,
+height = 250 - margin.top - margin.bottom,
 height2 = 500 - margin2.top - margin2.bottom;
 
 var x = d3.scale.linear().range([0, width]).domain([0, 1876]),
@@ -16,7 +16,7 @@ var svg = d3.select(".viz").append("svg")
 
 var main = svg.append("g")
 .attr("class", "focus")
-.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+.attr("transform", "translate(" + 30 + "," + margin.top + ")");
 
 main.append("g")
 .attr("class", "x axis")
@@ -37,6 +37,7 @@ d3.json("./frequency.json", function(error, json) {
   });
   x.domain([data[0].Timestamp,data[data.length-1].Timestamp]);
   drawArea(data);
+  drawSlider(data);
 });
 
 svg.append("defs").append("clipPath")
@@ -58,7 +59,9 @@ function drawArea(data){
   .attr("d",area);
 }
 function brushed(){
-  console.log("Brushed!");
+console.log(brush.extent());
+myVideo.currentTime = brush.extent()[0];$("#main-vis-slider").attr('d',sliderGen(data));
+
 }
 
 var brush = d3.svg.brush()
@@ -71,3 +74,16 @@ main.append("g")
 .selectAll("rect")
 .attr("y", -6)
 .attr("height", height);
+
+function drawSlider(){
+ sliderGen = d3.svg.line()
+.x(function(d){return x(myVideo.currentTime+data[0].Timestamp);})
+.y(function(d){return y(d.Timestamp);})
+.interpolate("line");
+
+ slider = main.append('svg:path')
+.attr("id","main-vis-slider")
+.attr('d',sliderGen(data))
+.attr('stroke-width', 2)
+.attr('stroke','blue');
+}

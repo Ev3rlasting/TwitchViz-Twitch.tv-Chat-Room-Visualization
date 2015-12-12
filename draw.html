@@ -3,8 +3,16 @@
 <head>
   <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
-  <link href="http://getbootstrap.com/examples/justified-nav/justified-nav.css" rel="stylesheet">
   <script src="https://ttv-api.s3.amazonaws.com/twitch.min.js"></script>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <link href="./jumbotron-narrow.css" rel="stylesheet">
   <style>
   svg {
     font: 10px sans-serif;
@@ -20,9 +28,6 @@
     stroke: #000;
     shape-rendering: crispEdges;
   }
-  .resize g{
-    color:white;
-  }
 
   .brush .extent {
     stroke: #fff;
@@ -32,35 +37,62 @@
   </style>
 </head>
 <body>
+  <!--Twitch Video  -->
+  <!-- <object style="width: 1000px; height: 600px; " data="http://player.twitch.tv/?video=v21942485&time=11985"></object> -->
+  <!--End of Twitch Video  -->
+  <!--Video Player overlay html  -->
 
-  <div class="videocontainer">
-
-    <video id="lol" width="auto" height="auto" controls>
-      <source src="./videos/trimmed.mp4" type="video/mp4">
-      </video>
-      <br/>
-      <div class="video-buttons-area">
-        <button onclick="playPause()">Play/Pause</button>
-        <button onclick="makeBig()">Big</button>
-        <button onclick="makeSmall()">Small</button>
-        <button onclick="makeNormal()">Normal</button>
+  <div class="col-md-8">
+    <div class="container">
+      <div class="header clearfix">
+        <h3 class="text-muted">Twitch.tv Chatroom Visualization Tool</h3>
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation" class="active">A visualization tool that helps game designers and senior Twitch.tv broadcasters better understandA visualization tool that helps game designers and senior Twitch.tv broadcasters better understandA visualization tool that helps game designers and senior Twitch.tv broadcasters
+              better understandA visualization tool that helps game designers and senior Twitch.tv broadcasters better understand </li>
+            </ul>
+          </nav>
       </div>
-      <!--Twitch Video  -->
-      <!-- <iframe src="http://player.twitch.tv/?video=v21942485" frameborder="0" scrolling="no" height="378" width="620"></iframe><a href="http://www.twitch.tv/wingsofdeath?tt_medium=live_embed&tt_content=text_link" style="padding:2px 0px 4px; display:block; width:345px; font-weight:normal; font-size:10px;text-decoration:underline;">Watch live video from Wingsofdeath on www.twitch.tv</a> -->
-      <!-- <object style="width: 1000px; height: 600px; " data="http://player.twitch.tv/?video=v21942485&time=11985"></object> -->
-      <!--End of Twitch Video  -->
-      <!--Video Player overlay html  -->
-      <div class="overlay">
-        <div class="viz">
-          <!-- <svg id="visualisation" width="1200" height="500"></svg> -->
+        <div class="jumbotron" style="
+        padding-top: 0px;
+        padding-bottom: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+        margin-left: 0px;
+        ">
+        <video id="lol" width="700" height="auto" controls>
+          <source src="./videos/trimmed.mp4" type="video/mp4">
+          </video>
+          <br/>
+          <div class="video-buttons-area">
+            <button type="button" class="btn btn-default" onclick="playPause()">Play/Pause</button>
+            <button type="button" class="btn btn-default" onclick="makeBig()">Big</button>
+            <button type="button" class="btn btn-default" onclick="makeSmall()">Small</button>
+            <button type="button" class="btn btn-default" onclick="makeNormal()">Normal</button>
+          </div>
+        </div>
+
+        <div class="row marketing">
+          <div class="viz">
+            <!-- <svg id="visualisation" width="1200" height="500"></svg> -->
+          </div>
+            <button type="button" class="btn btn-primary" onclick="addCode()">Add my code...</button>
         </div>
       </div>
-      <!--End of Video Player overlay html  -->
+      <footer class="footer">
+        <p>2015, Rui (Ray) Pan, For IAT 814, SFU</p>
+        <p>Bootstrap Theme Template from getbootstrap.com/examples</p>
+      </footer>
     </div>
-    <!--End of Videocontainer  -->
+  </div>
+    <div class="detail-vis col-4">
+      <h4>Here are the detailed visualizations of the time periods you selected:</h4>
+      <h5>You can choose multiple time periods using the brush!</h5>
+    </div>
+
   </body>
   <script src="http://d3js.org/d3.v3.js" charset="utf-8"></script>
-  <script src="./videocontrol.js"></script>
+  <script src="./control.js"></script>
   <script src="./visualization.js"></script>
 
   </html>

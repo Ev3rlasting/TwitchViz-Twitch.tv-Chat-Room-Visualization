@@ -12,15 +12,15 @@ function playPause() {
 }
 
 function makeBig() {
-  myVideo.width = 1200;
+  myVideo.width = 900;
 }
 
 function makeSmall() {
-  myVideo.width = 600;
+  myVideo.width = 500;
 }
 
 function makeNormal() {
-  myVideo.width = 800;
+  myVideo.width = 700;
 }
 function updateSlider(){
   if(myVideo.paused==false){
