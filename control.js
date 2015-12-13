@@ -1,3 +1,4 @@
+var selectionNumber = 0;
 var myVideo = document.getElementById("lol");
 function playPause() {
   if (myVideo.paused){
@@ -28,4 +29,11 @@ function updateSlider(){
   $("#main-vis-slider").attr('d',sliderGen(data));
   }
 }
+
+function resetDetail(){
+  selectionNumber=0;
+  document.getElementById('detail-vis-frame').contentWindow.location.reload();
+  
+}
+
 setInterval(updateSlider,500);

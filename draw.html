@@ -77,18 +77,23 @@
             <!-- <svg id="visualisation" width="1200" height="500"></svg> -->
           </div>
             <button type="button" class="btn btn-primary" onclick="addCode()">Add my code...</button>
+            <button type="button" class="btn btn-info" onclick="addExtent()">Draw Detail</button>
+            <button type="button" class="btn btn-warning" onclick="resetDetail()">Reset Details</button>
         </div>
       </div>
       <footer class="footer">
-        <p>2015, Rui (Ray) Pan, For IAT 814, SFU</p>
-        <p>Bootstrap Theme Template from getbootstrap.com/examples</p>
+        <p>2015, Rui (Ray) Pan, For IAT 814, SIAT, SFU</p>
+        <p>Please use (min) 1280*800 resolution. Contact: ruip@sfu.ca</p>
       </footer>
     </div>
   </div>
-    <div class="detail-vis col-4">
+    <div class="col-4">
       <h4>Here are the detailed visualizations of the time periods you selected:</h4>
       <h5>You can choose multiple time periods using the brush!</h5>
-      <iframe height="800" src="./refugee.html"></iframe>
+      <iframe id="detail-vis-frame" style="margin-top:50px;"height="800" width="400" src="./details.html" scrolling="no" frameborder='0'></iframe>
+      <div class="detail-vis">
+
+      </div>
     </div>
 
   </body>
