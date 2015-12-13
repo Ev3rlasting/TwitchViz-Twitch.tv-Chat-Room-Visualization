@@ -62,16 +62,7 @@ function brushed(){
 console.log(brush.extent());
 myVideo.currentTime = brush.extent()[0];$("#main-vis-slider").attr('d',sliderGen(data));
 }
-function addExtent(){
-  $.ajax({
-    method: "POST",
-    url: "AddDetail.php",
-    data: { "selectionNumber":selectionNumber++, "start":brush.extent()[0], "end": brush.extent()[1] }
-  })
-    .done(function( msg ) {
-      console.log( "New line added! " + msg );
-    });
-}
+
 
 var brush = d3.svg.brush()
 .x(x)

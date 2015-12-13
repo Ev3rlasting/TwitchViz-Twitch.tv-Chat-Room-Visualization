@@ -21,7 +21,6 @@ else if($_POST["Type"] == "Frequency")
   fwrite($handle,$data."\n");
 }
 else {
-  die("I am done.....");
+  die("I am done..... Nothing happened");
 }
-
 ?>

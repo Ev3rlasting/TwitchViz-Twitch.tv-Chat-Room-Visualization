@@ -1,4 +1,5 @@
 var selectionNumber = 0;
+var displayLegend=false;
 var myVideo = document.getElementById("lol");
 function playPause() {
   if (myVideo.paused){
@@ -23,17 +24,43 @@ function makeSmall() {
 function makeNormal() {
   myVideo.width = 700;
 }
+
 function updateSlider(){
   if(myVideo.paused==false){
-  console.log(myVideo.currentTime);
-  $("#main-vis-slider").attr('d',sliderGen(data));
+    console.log(myVideo.currentTime);
+    $("#main-vis-slider").attr('d',sliderGen(data));
   }
+}
+
+function drawDetail(){
+  if(brush.extent()[1]==0){
+    alert("Please select a time interval using the brush :) ");
+    return;
+  }
+  $.ajax({
+    method: "POST",
+    url: "AddDetail.php",
+    data: { "selectionNumber":selectionNumber++, "start":brush.extent()[0], "end": brush.extent()[1] }
+  })
+    .done(function( msg ) {
+      console.log( "New line added! " + msg );
+      displayLegend=true;
+      document.getElementById('detail-vis-frame').contentWindow.location.reload();
+    });
 }
 
 function resetDetail(){
   selectionNumber=0;
-  document.getElementById('detail-vis-frame').contentWindow.location.reload();
-  
+  $.ajax({
+    method: "POST",
+    url: "AddDetail.php",
+    data: { "reset":1 }
+  })
+  .done(function( msg ) {
+    console.log( msg );
+    displayLegend=false;
+    document.getElementById('detail-vis-frame').contentWindow.location.reload();
+  });
 }
 
 setInterval(updateSlider,500);
