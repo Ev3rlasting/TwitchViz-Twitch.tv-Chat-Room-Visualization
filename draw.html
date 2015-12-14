@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script src="https://ttv-api.s3.amazonaws.com/twitch.min.js"></script>
-  <!-- Latest compiled and minified CSS -->
+  <script src="jscolor.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-
-  <!-- Optional theme -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
-
-  <!-- Latest compiled and minified JavaScript -->
+  <link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/dot-luv/jquery-ui.css" />
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.3.0/css/bootstrap-colorpicker.css" />
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <link href="./jumbotron-narrow.css" rel="stylesheet">
   <style>
@@ -18,9 +17,9 @@
     font: 10px sans-serif;
   }
   .area {
-    fill: steelblue;
+    /*fill: steelblue;*/
     clip-path: url(#clip);
-    opacity: 0.9;
+    opacity: 0.7;
   }
   .axis path,
   .axis line {
@@ -34,6 +33,8 @@
     fill-opacity: .125;
     shape-rendering: crispEdges;
   }
+  #slider-range{width:400px;}
+  #slider-range,#time{margin:10px;display:block;}
   </style>
 </head>
 <body>
@@ -48,11 +49,24 @@
         <h3 class="text-muted">Twitch.tv Chatroom Visualization Tool</h3>
         <nav>
           <ul class="nav nav-pills pull-right">
-            <li role="presentation" class="active">A visualization tool that helps game designers and senior Twitch.tv broadcasters better understandA visualization tool that helps game designers and senior Twitch.tv broadcasters better understandA visualization tool that helps game designers and senior Twitch.tv broadcasters
-              better understandA visualization tool that helps game designers and senior Twitch.tv broadcasters better understand </li>
+            <li role="presentation" class="active">
+              A <b>visualization tool</b> that helps game designers and senior
+              Twitch.tv broadcasters better understand how the gameplay video has an
+              affect on viewers' chatting behavior. <br/>
+              <b>Instruction:</b><br/>
+              1. Click the blue area chart and using the black slider to navigate the video. The current video clip will automatically change to the corresponding timestamp you clicked.
+              <br/>
+              2. Drag your cursor on the blue area chart and brush an interval. Then click 'Draw Detail' button to explore a detailed bar chart on the right.
+              <br/>
+              3. You can repeat Step 2 to brush for multiple times and compare these intervals! The stacked bar chart shows the comparison of different catagories of chatting topic. (Try to hover your cursor to explore the exact number!)
+              <br/>
+              4. If you want to define your own game stage code to the area chart, just simply click 'Add my code...' button, choose the interval, pick a color you like and define your code. Then click 'Submit' button.
+              <br/><br/>(The codes here can be the main theme of selected game stage, for example:"Game loading", "Farming","Teamfight!","Ganking/Camping","End of the game")
+
+            </li>
             </ul>
           </nav>
-      </div>
+        </div>
         <div class="jumbotron" style="
         padding-top: 0px;
         padding-bottom: 0px;
@@ -61,7 +75,7 @@
         margin-left: 0px;
         ">
         <video id="lol" width="700" height="auto" controls>
-          <source src="./videos/trimmed.mp4" type="video/mp4">
+          <source src="https://s3-us-west-1.amazonaws.com/godknowswhatthenameis/trimmed.mp4" type="video/mp4">
           </video>
           <br/>
           <div class="video-buttons-area">
@@ -74,12 +88,23 @@
 
         <div class="row marketing">
           <div class="viz">
+            <h5 style='text-align:center'>Area Chart: Frequency of Posting Message by Viewers</h5>
+            <p style='text-align:left'>X Axis: Game Time <br/>Y Axis: Frequency</p>
             <!-- <svg id="visualisation" width="1200" height="500"></svg> -->
           </div>
-            <button type="button" class="btn btn-primary" onclick="addCode()">Add my code...</button>
-            <button type="button" class="btn btn-info" onclick="drawDetail()">Draw Detail</button>
-            <button type="button" class="btn btn-warning" onclick="resetDetail()">Reset Details</button>
+          <button type="button" class="btn btn-primary" onclick="addCode()">Add my code...</button>
+          <button type="button" class="btn btn-info" onclick="drawDetail()">Draw Detail</button>
+          <button type="button" class="btn btn-warning" onclick="resetDetail()">Reset Details</button>
         </div>
+        <div class="code-area">
+        <div class="time-picker" style="display:none">
+          <div id="slider-range"></div>
+          <span id="time"></span>
+        Pick a color: <input class="jscolor" value="ab2567"><br/><br/>
+        <input type="text" id="code-name" class="form-control" style="width:400px;"placeholder="Add a code name..."><br/>
+        <button type="button" class="btn btn-success" onclick="submitInterval()">Submit</button>
+        </div>
+      </div>
       </div>
       <footer class="footer">
         <p>2015, Rui (Ray) Pan, For IAT 814, SIAT, SFU</p>
@@ -87,19 +112,17 @@
       </footer>
     </div>
   </div>
-    <div class="col-4">
-      <h4>Here are the detailed visualizations of the time periods you selected:</h4>
-      <h5>You can choose multiple time periods using the brush!</h5>
-      <h5>Try to hover your cursor on the bar!</h5>
-      <iframe id="detail-vis-frame" style="margin-top:30px;"height="800" width="400" src="./details.html" scrolling="no" frameborder='0'></iframe>
-      <div class="detail-vis">
-
-      </div>
+  <div class="col-4">
+    <h4>Here are the detailed visualizations of the time intervals you selected:</h4>
+    <h5>You can compare multiple time intervals!</h5>
+    <h5>Try to hover your cursor on the bar!</h5>
+    <iframe id="detail-vis-frame" style="margin-top:200px;"height="800" width="400" src="./details.html" scrolling="no" frameborder='0'></iframe>
+    <div class="detail-vis">
     </div>
+  </div>
+</body>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.10/d3.min.js"></script>
+<script src="./control.js"></script>
+<script src="./visualization.js"></script>
 
-  </body>
-  <script src="http://d3js.org/d3.v3.js" charset="utf-8"></script>
-  <script src="./control.js"></script>
-  <script src="./visualization.js"></script>
-
-  </html>
+</html>

@@ -53,16 +53,18 @@ var area = d3.svg.area()
 .y1(function(d) { return y(d.Frequency); });
 
 function drawArea(data){
-  main.append("path")
+  AreaChart = main.append("path")
   .attr("class","area")
+  .attr("id","main-area-chart")
   .datum(data)
-  .attr("d",area);
+  .attr("d",area)
+  .attr("fill","steelblue");
 }
+
 function brushed(){
 console.log(brush.extent());
 myVideo.currentTime = brush.extent()[0];$("#main-vis-slider").attr('d',sliderGen(data));
 }
-
 
 var brush = d3.svg.brush()
 .x(x)
@@ -81,9 +83,9 @@ function drawSlider(){
 .y(function(d){return y(d.Timestamp);})
 .interpolate("line");
 
- slider = main.append('svg:path')
+slider = main.append('svg:path')
 .attr("id","main-vis-slider")
 .attr('d',sliderGen(data))
 .attr('stroke-width', 2)
-.attr('stroke','blue');
+.attr('stroke','black');
 }

@@ -33,10 +33,9 @@ div.tooltip {
 }
 </style>
 <body>
-  <script src="//d3js.org/d3.v3.min.js"></script>
-  <script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.10/d3.min.js"></script>  <script>
   var margin = {top: 0, right: 0, bottom: 0, left: 0},
-  width = 600 - margin.left - margin.right,
+  width = 450 - margin.left - margin.right,
   height = 250 - margin.top - margin.bottom;
 
   var x = d3.scale.ordinal()
@@ -64,7 +63,7 @@ div.tooltip {
   .attr("height", 500)
   .attr("width", 400)
   .append("g")
-  .attr("transform", "translate(300,0)"+" rotate(90)");
+  .attr("transform", "translate(300,30)"+" rotate(90)");
 
   d3.csv("data.csv", function(error, data) {
     if (error) throw error;
@@ -148,5 +147,10 @@ div.tooltip {
     <img id="legend" style="float:right;display:none;" src="./legend.png" width="100px" height="100px"></img>
   </body>
 <script type="text/javascript">
-  if(parent.)
+  if(parent.displayLegend==false){
+    document.getElementById('legend').style.display = 'none';
+  }
+  else {
+    document.getElementById('legend').style.display = 'block';
+  }
 </script>
