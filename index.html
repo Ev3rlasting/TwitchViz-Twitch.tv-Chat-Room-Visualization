@@ -33,7 +33,7 @@
     fill-opacity: .125;
     shape-rendering: crispEdges;
   }
-  #slider-range{width:400px;}
+  #slider-range{width:100%;}
   #slider-range,#time{margin:10px;display:block;}
   </style>
 </head>
@@ -46,7 +46,7 @@
   <div class="col-md-8">
     <div class="container">
       <div class="header clearfix">
-        <h3 class="text-muted">Twitch.tv Chatroom Visualization Tool</h3>
+        <h3 class="text-muted">TwitchViz: A Twitch.tv Chatroom Visualization Tool</h3>
         <nav>
           <ul class="nav nav-pills pull-right">
             <li role="presentation" class="active">
@@ -54,16 +54,15 @@
               Twitch.tv broadcasters better understand how the gameplay video has an
               affect on viewers' chatting behavior. <br/>
               <b>Instruction:</b><br/>
-              1. Click the blue area chart and using the black slider to navigate the video. The current video clip will automatically change to the corresponding timestamp you clicked.
+              1. Click the blue area chart and use the black navigation bar to navigate the video. The current video clip will automatically change to the corresponding timestamp you clicked.
               <br/>
               2. Drag your cursor on the blue area chart and brush an interval. Then click 'Draw Detail' button to explore a detailed bar chart on the right.
               <br/>
               3. You can repeat Step 2 to brush for multiple times and compare these intervals! The stacked bar chart shows the comparison of different catagories of chatting topic. (Try to hover your cursor to explore the exact number!)
               <br/>
               <br/>
-              * You can also define your own game stage code to the area chart, just simply click 'Add my code...' button, choose the interval, pick a color you like and define your code. Then click 'Submit' button.
+              * You can also define your own game stage code to the area chart, just simply click 'Add my code...' button, choose the interval using time slider, pick a color you like and assign your code. Click 'Submit' button afterwards.
               <br/>(The codes here can be the main theme of selected game stage, for example:"Game loading", "Farming","Teamfight!","Ganking/Camping","End of the game")
-
             </li>
             </ul>
           </nav>
@@ -76,7 +75,7 @@
         margin-left: 0px;
         ">
         <video id="lol" width="700" height="auto" controls>
-          <source src="https://s3-us-west-1.amazonaws.com/godknowswhatthenameis/trimmed.mp4" type="video/mp4">
+          <source src="./videos/trimmed.mp4" type="video/mp4">
           </video>
           <br/>
           <div class="video-buttons-area">
@@ -89,7 +88,7 @@
 
         <div class="row marketing">
           <div class="viz">
-            <h5 style='text-align:center'>Area Chart: Frequency of Posting Message by Viewers</h5>
+            <h5 style='text-align:center'>Area Chart: Frequency of Viewer Message Posting</h5>
             <p style='text-align:left'>X Axis: Game Time <br/>Y Axis: Frequency</p>
             <!-- <svg id="visualisation" width="1200" height="500"></svg> -->
           </div>

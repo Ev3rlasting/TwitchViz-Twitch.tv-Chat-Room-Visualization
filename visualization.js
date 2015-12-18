@@ -4,7 +4,7 @@ width = 700 - margin.left - margin.right,
 height = 250 - margin.top - margin.bottom,
 height2 = 500 - margin2.top - margin2.bottom;
 
-var x = d3.scale.linear().range([0, width]).domain([0, 1876]),
+var x = d3.scale.linear().range([0, width]).domain([0, 1781]),
 y = d3.scale.linear().range([height, 0]).domain([0, 2]);
 
 var xAxis = d3.svg.axis().scale(x).ticks(20).orient("bottom"),
@@ -47,7 +47,7 @@ svg.append("defs").append("clipPath")
     .attr("height", height);
 
 var area = d3.svg.area()
-.interpolate("monotone")
+.interpolate("monopoly")
 .x(function(d) { return x(d.Timestamp); })
 .y0(height)
 .y1(function(d) { return y(d.Frequency); });
