@@ -47,7 +47,7 @@ svg.append("defs").append("clipPath")
     .attr("height", height);
 
 var area = d3.svg.area()
-.interpolate("monopoly")
+.interpolate("monotone")
 .x(function(d) { return x(d.Timestamp); })
 .y0(height)
 .y1(function(d) { return y(d.Frequency); });
