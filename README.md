@@ -1,8 +1,6 @@
 # Twitch.tv Chatroom Visualization
 A visualization tool that helps game designers and senior Twitch.tv broadcasters better understand how the gameplay video has an affect on viewers' chatting behavior. 
 
-Demo Website: https://raypan.me/viz
-
 Instructions:
 1. Click the blue area chart and use the black navigation bar to navigate the video. The current video clip will automatically change to the corresponding timestamp you clicked. 
 
